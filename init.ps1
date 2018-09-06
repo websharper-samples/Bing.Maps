@@ -90,9 +90,10 @@ read-host "When done, press enter to commit all"
 git add .
 git commit -m "Initial commit for $sampleName"
 git fetch origin gh-pages:gh-pages
+git remote set-url origin $repo
 write-host @"
-Committed, You can now push:
-    git remote set-url origin $repo
-    git push origin master
+Committed and set remote to $repo.
+You can now push:
     git push origin gh-pages
+    git push origin master
 "@ -f green
