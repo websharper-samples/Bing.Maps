@@ -1,1 +1,1 @@
-document.write("<script src=\"http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0\" type=\"text/javascript\" charset=\"UTF-8\"></script><script src=\"https://code.jquery.com/jquery-3.1.1.min.js\" type=\"text/javascript\" charset=\"UTF-8\"></script>")
+document.write("<script src=\"https://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0\" type=\"text/javascript\" charset=\"UTF-8\"></script><script src=\"https://code.jquery.com/jquery-3.1.1.min.js\" type=\"text/javascript\" charset=\"UTF-8\"></script>")
