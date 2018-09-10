@@ -336,7 +336,7 @@ if (!console) {
 (function()
 {
  "use strict";
- var Global,WebSharper,Bing,Tests,Main,Obj,Html,Client,Pagelet,Tags,Operators,EventTarget,Node,TagBuilder,Operators$1,Arrays,AttributeBuilder,Attr,EventsPervasives,Maps,Rest,Element,List,T,JavaScript,Pervasives,WindowOrWorkerGlobalScope,SC$1,Text,SC$2,Strings,Implementation,JQueryHtmlProvider,DeprecatedTagBuilder,Attribute,SC$3,SC$4,Unchecked,Seq,Enumerator,Events,JQueryEventSupport,T$1,Object,Microsoft,Maps$1,MapTypeId,Events$1,Directions,DistanceUnit,IntelliFactory,Runtime;
+ var Global,WebSharper,Bing,Tests,Main,Obj,Html,Client,Pagelet,Tags,Operators,EventTarget,Node,TagBuilder,Arrays,AttributeBuilder,Attr,EventsPervasives,Maps,Rest,Element,List,T,WindowOrWorkerGlobalScope,SC$1,Text,Operators$1,MapsLoading,SC$2,JavaScript,Pervasives,Strings,Implementation,JQueryHtmlProvider,DeprecatedTagBuilder,Collections,List$1,Attribute,SC$3,SC$4,Unchecked,Seq,Enumerator,Object,ListEnumerator,Events,JQueryEventSupport,T$1,IntelliFactory,Runtime;
  Global=self;
  WebSharper=Global.WebSharper=Global.WebSharper||{};
  Bing=WebSharper.Bing=WebSharper.Bing||{};
@@ -351,7 +351,6 @@ if (!console) {
  EventTarget=Global.EventTarget;
  Node=Global.Node;
  TagBuilder=Client.TagBuilder=Client.TagBuilder||{};
- Operators$1=Client.Operators=Client.Operators||{};
  Arrays=WebSharper.Arrays=WebSharper.Arrays||{};
  AttributeBuilder=Client.AttributeBuilder=Client.AttributeBuilder||{};
  Attr=Client.Attr=Client.Attr||{};
@@ -361,277 +360,222 @@ if (!console) {
  Element=Client.Element=Client.Element||{};
  List=WebSharper.List=WebSharper.List||{};
  T=List.T=List.T||{};
- JavaScript=WebSharper.JavaScript=WebSharper.JavaScript||{};
- Pervasives=JavaScript.Pervasives=JavaScript.Pervasives||{};
  WindowOrWorkerGlobalScope=Global.WindowOrWorkerGlobalScope;
  SC$1=Global.StartupCode$WebSharper_Html_Client$Html=Global.StartupCode$WebSharper_Html_Client$Html||{};
  Text=Client.Text=Client.Text||{};
+ Operators$1=Client.Operators=Client.Operators||{};
+ MapsLoading=Maps.MapsLoading=Maps.MapsLoading||{};
  SC$2=Global.StartupCode$Bing_Maps$Client=Global.StartupCode$Bing_Maps$Client||{};
+ JavaScript=WebSharper.JavaScript=WebSharper.JavaScript||{};
+ Pervasives=JavaScript.Pervasives=JavaScript.Pervasives||{};
  Strings=WebSharper.Strings=WebSharper.Strings||{};
  Implementation=Client.Implementation=Client.Implementation||{};
  JQueryHtmlProvider=Implementation.JQueryHtmlProvider=Implementation.JQueryHtmlProvider||{};
  DeprecatedTagBuilder=Client.DeprecatedTagBuilder=Client.DeprecatedTagBuilder||{};
+ Collections=WebSharper.Collections=WebSharper.Collections||{};
+ List$1=Collections.List=Collections.List||{};
  Attribute=Client.Attribute=Client.Attribute||{};
  SC$3=Global.StartupCode$WebSharper_Html_Client$Events=Global.StartupCode$WebSharper_Html_Client$Events||{};
  SC$4=Global.StartupCode$WebSharper_Bing_Maps_Rest$Rest=Global.StartupCode$WebSharper_Bing_Maps_Rest$Rest||{};
  Unchecked=WebSharper.Unchecked=WebSharper.Unchecked||{};
  Seq=WebSharper.Seq=WebSharper.Seq||{};
  Enumerator=WebSharper.Enumerator=WebSharper.Enumerator||{};
+ Object=Global.Object;
+ ListEnumerator=Collections.ListEnumerator=Collections.ListEnumerator||{};
  Events=Client.Events=Client.Events||{};
  JQueryEventSupport=Events.JQueryEventSupport=Events.JQueryEventSupport||{};
  T$1=Enumerator.T=Enumerator.T||{};
- Object=Global.Object;
- Microsoft=Global.Microsoft;
- Maps$1=Microsoft&&Microsoft.Maps;
- MapTypeId=Maps$1&&Maps$1.MapTypeId;
- Events$1=Maps$1&&Maps$1.Events;
- Directions=Maps$1&&Maps$1.Directions;
- DistanceUnit=Directions&&Directions.DistanceUnit;
  IntelliFactory=Global.IntelliFactory;
  Runtime=IntelliFactory&&IntelliFactory.Runtime;
  Main.Samples=function()
  {
-  var a,a$1,a$2,a$3,a$4,a$5,a$6,a$7,a$8;
-  (a=[(a$1=[Tags.Tags().text("Basic map")],Tags.Tags().NewTag("h2",a$1)),Main.MapElement(),(a$2=[Tags.Tags().text("Tile layer")],Tags.Tags().NewTag("h2",a$2)),Main.MapWithTileLayer(),(a$3=[Tags.Tags().text("Map with event management (click me!)")],Tags.Tags().NewTag("h2",a$3)),Main.MouseEvent(),(a$4=[Tags.Tags().text("Search for a location")],Tags.Tags().NewTag("h2",a$4)),Main.LocationRequest(),(a$5=[Tags.Tags().text("Pin a latitude/longitude point")],Tags.Tags().NewTag("h2",a$5)),Main.LatLonLocationRequest(),(a$6=[Tags.Tags().text("Search for a route between two locations")],Tags.Tags().NewTag("h2",a$6)),Main.RouteRequest(),(a$7=[Tags.Tags().text("Static maps")],Tags.Tags().NewTag("h2",a$7)),Main.StaticMap(),(a$8=[Tags.Tags().text("Retrieve metadata about the images")],Tags.Tags().NewTag("h2",a$8)),Main.ImageMetadata()],Tags.Tags().NewTag("div",a)).AppendTo("main");
+  var a,a$1,a$2,a$3,a$4,a$5,a$6,a$7;
+  (a=[(a$1=[Tags.Tags().text("Basic map")],Tags.Tags().NewTag("h2",a$1)),Main.MapElement(),(a$2=[Tags.Tags().text("Tile layer")],Tags.Tags().NewTag("h2",a$2)),Main.MapWithTileLayer(),(a$3=[Tags.Tags().text("Map with event management (click me!)")],Tags.Tags().NewTag("h2",a$3)),Main.MouseEvent(),(a$4=[Tags.Tags().text("Search for a location")],Tags.Tags().NewTag("h2",a$4)),Main.LocationRequest(),(a$5=[Tags.Tags().text("Pin a latitude/longitude point")],Tags.Tags().NewTag("h2",a$5)),Main.LatLonLocationRequest(),(a$6=[Tags.Tags().text("Static maps")],Tags.Tags().NewTag("h2",a$6)),Main.StaticMap(),(a$7=[Tags.Tags().text("Retrieve metadata about the images")],Tags.Tags().NewTag("h2",a$7)),Main.ImageMetadata()],Tags.Tags().NewTag("div",a)).AppendTo("main");
  };
  Main.MapElement=function()
  {
-  var x;
-  function f(el)
+  return Main.MakeMapWrapper(function(el)
   {
-   var options,r;
-   options=(r={},r.credentials=Main.credentials(),r.width=400,r.height=400,r.mapTypeId=MapTypeId.birdseye,r);
-   (new Maps$1.Map(el.get_Body(),options)).setMapType(MapTypeId.birdseye);
-  }
-  x=Tags.Tags().NewTag("div",[]);
-  (function(w)
-  {
-   Operators$1.OnAfterRender(f,w);
-  }(x));
-  return x;
+   return function(api)
+   {
+    var b,r;
+    return(b=(r={},r.credentials=Main.credentials(),r),new self.Microsoft.Maps.Map(el,b)).setMapType(api.MapTypeId.birdseye);
+   };
+  });
  };
  Main.MapWithTileLayer=function()
  {
-  var x;
-  function f(el)
+  return Main.MakeMapWrapper(function(el)
   {
-   var options,r,map,tileLayer,r$1,r$2;
-   options=(r={},r.credentials=Main.credentials(),r.width=400,r.height=400,r.mapTypeId=MapTypeId.aerial,r);
-   map=new Maps$1.Map(el.get_Body(),options);
-   tileLayer=new Maps$1.TileLayer((r$1={},r$1.mercator=new Maps$1.TileSource((r$2={},r$2.uriConstructor="http://www.microsoft.com/maps/isdk/ajax/layers/lidar/{quadkey}.png",r$2)),r$1.opacity=0.7,r$1));
-   map.entities.push(tileLayer);
-  }
-  x=Tags.Tags().NewTag("div",[]);
-  (function(w)
-  {
-   Operators$1.OnAfterRender(f,w);
-  }(x));
-  return x;
+   return function(api)
+   {
+    var map,b,r,tileLayer,a,r$1,a$1,r$2;
+    map=(b=(r={},r.credentials=Main.credentials(),r.mapTypeId=api.MapTypeId.aerial,r),new self.Microsoft.Maps.Map(el,b));
+    tileLayer=(a=(r$1={},r$1.mercator=(a$1=(r$2={},r$2.uriConstructor="https://www.microsoft.com/maps/isdk/ajax/layers/lidar/{quadkey}.png",r$2),new self.Microsoft.Maps.TileSource(a$1)),r$1.opacity=0.7,r$1),new self.Microsoft.Maps.TileLayer(a));
+    return map.entities.push(tileLayer);
+   };
+  });
  };
  Main.MouseEvent=function()
  {
-  var x;
-  function f(el)
+  return Main.MakeMapWrapper(function(el)
   {
-   var opt,r,map,pin,r$1;
-   opt=(r={},r.credentials=Main.credentials(),r.width=600,r.height=500,r);
-   map=new Maps$1.Map(el.get_Body(),opt);
-   pin=new Maps$1.Pushpin(map.getCenter(),(r$1={},r$1.draggable=true,r$1));
-   map.entities.push(pin);
-   Events$1.addHandler(map,"click",function(e)
+   return function(api)
    {
-    var pinLocation,pinPoint,mousePoint,mouseLocation;
-    e.target.getCenter();
-    pinLocation=pin.getLocation();
-    pinPoint=map.tryLocationToPixel(pinLocation);
-    mousePoint=new Maps$1.Point(e.getX(),e.getY());
-    mouseLocation=map.tryPixelToLocation(mousePoint);
-    Global.alert("pushpin (lat/lon): "+Global.String(pinLocation.latitude)+", "+Global.String(pinLocation.longitude)+"\npushpin (screen x/y): "+Global.String(pinPoint.x)+","+Global.String(pinPoint.y)+"\nmouse (lat/lon): "+Global.String(mouseLocation.latitude)+", "+Global.String(mouseLocation.longitude)+"\nmouse (screen x/y): "+Global.String(mousePoint.x)+","+Global.String(mousePoint.y));
-   });
-  }
-  x=Tags.Tags().NewTag("div",[]);
-  (function(w)
-  {
-   Operators$1.OnAfterRender(f,w);
-  }(x));
-  return x;
+    var map,b,r,pin,a,b$1,r$1;
+    map=(b=(r={},r.credentials=Main.credentials(),r),new self.Microsoft.Maps.Map(el,b));
+    pin=(a=map.getCenter(),(b$1=(r$1={},r$1.draggable=true,r$1),new self.Microsoft.Maps.Pushpin(a,b$1)));
+    map.entities.push(pin);
+    api.Events.addHandler(map,"click",function(e)
+    {
+     var pinLocation,pinPoint,mousePoint,a$1,b$2,mouseLocation;
+     e.target.getCenter();
+     pinLocation=pin.getLocation();
+     pinPoint=map.tryLocationToPixel(pinLocation);
+     mousePoint=(a$1=e.getX(),(b$2=e.getY(),new self.Microsoft.Maps.Point(a$1,b$2)));
+     mouseLocation=map.tryPixelToLocation(mousePoint);
+     Global.alert("pushpin (lat/lon): "+Global.String(pinLocation.latitude)+", "+Global.String(pinLocation.longitude)+"\npushpin (screen x/y): "+Global.String(pinPoint.x)+","+Global.String(pinPoint.y)+"\nmouse (lat/lon): "+Global.String(mouseLocation.latitude)+", "+Global.String(mouseLocation.longitude)+"\nmouse (screen x/y): "+Global.String(mousePoint.x)+","+Global.String(mousePoint.y));
+    });
+   };
+  });
  };
  Main.LocationRequest=function()
  {
-  var input,a,button,a$1,responseDiv,a$2,x;
-  function f(el)
-  {
-   var opts,r,map;
-   function request(a$3,a$4)
-   {
-    return Rest.RequestLocationByQuery(Main.credentials(),input.get_Value(),function(r$1)
-    {
-     Main.GeocodeCallback(map,responseDiv,r$1);
-    });
-   }
-   opts=(r={},r.credentials=Main.credentials(),r.width=600,r.height=500,r);
-   map=new Maps$1.Map(el.get_Body(),opts);
-   map.setMapType(MapTypeId.road);
-   (function(a$3)
-   {
-    EventsPervasives.Events().OnClick(function($1)
-    {
-     return function($2)
-     {
-      return request($1,$2);
-     };
-    },a$3);
-   }(button));
-  }
+  var input,a,button,a$1,responseDiv,a$2;
   input=(a=[Attr.Attr().NewAttr("type","text")],Tags.Tags().NewTag("input",a));
   button=(a$1=[Attr.Attr().NewAttr("type","button"),Attr.Attr().NewAttr("value","Search")],Tags.Tags().NewTag("input",a$1));
   responseDiv=Tags.Tags().NewTag("div",[]);
-  a$2=[(x=Tags.Tags().NewTag("div",[]),(function(w)
+  a$2=[Main.MakeMapWrapper(function(el)
   {
-   Operators$1.OnAfterRender(f,w);
-  }(x),x)),Tags.Tags().NewTag("div",[input,button]),responseDiv];
+   return function(api)
+   {
+    var map,b,r;
+    function request(a$3,a$4)
+    {
+     return Rest.RequestLocationByQuery(Main.credentials(),input.get_Value(),function(r$1)
+     {
+      Main.GeocodeCallback(api,map,responseDiv,r$1);
+     });
+    }
+    map=(b=(r={},r.credentials=Main.credentials(),r),new self.Microsoft.Maps.Map(el,b));
+    map.setMapType(api.MapTypeId.road);
+    (function(a$3)
+    {
+     EventsPervasives.Events().OnClick(function($1)
+     {
+      return function($2)
+      {
+       return request($1,$2);
+      };
+     },a$3);
+    }(button),button);
+   };
+  }),Tags.Tags().NewTag("div",[input,button]),responseDiv];
   return Tags.Tags().NewTag("div",a$2);
  };
  Main.LatLonLocationRequest=function()
  {
-  var inputLat,a,inputLon,a$1,button,a$2,responseDiv,a$3,x,a$4,a$5,a$6;
-  function f(el)
-  {
-   var opts,r,map;
-   function request(a$7,a$8)
-   {
-    return Rest.RequestLocationByPoint(Main.credentials(),Global.Number(inputLat.get_Value()),Global.Number(inputLon.get_Value()),T.Empty,function(r$1)
-    {
-     Main.GeocodeCallback(map,responseDiv,r$1);
-    });
-   }
-   opts=(r={},r.credentials=Main.credentials(),r.width=600,r.height=500,r);
-   map=new Maps$1.Map(el.get_Body(),opts);
-   map.setMapType(MapTypeId.road);
-   (function(a$7)
-   {
-    EventsPervasives.Events().OnClick(function($1)
-    {
-     return function($2)
-     {
-      return request($1,$2);
-     };
-    },a$7);
-   }(button));
-  }
+  var inputLat,a,inputLon,a$1,button,a$2,responseDiv,a$3,a$4,a$5,a$6;
   inputLat=(a=[Attr.Attr().NewAttr("type","text")],Tags.Tags().NewTag("input",a));
   inputLon=(a$1=[Attr.Attr().NewAttr("type","text")],Tags.Tags().NewTag("input",a$1));
   button=(a$2=[Attr.Attr().NewAttr("type","button"),Attr.Attr().NewAttr("value","Search")],Tags.Tags().NewTag("input",a$2));
   responseDiv=Tags.Tags().NewTag("div",[]);
-  a$3=[(x=Tags.Tags().NewTag("div",[]),(function(w)
+  a$3=[Main.MakeMapWrapper(function(el)
   {
-   Operators$1.OnAfterRender(f,w);
-  }(x),x)),(a$4=[(a$5=[Tags.Tags().text("Latitude:")],Tags.Tags().NewTag("span",a$5)),inputLat,(a$6=[Tags.Tags().text("Longitude")],Tags.Tags().NewTag("span",a$6)),inputLon,button],Tags.Tags().NewTag("div",a$4)),responseDiv];
-  return Tags.Tags().NewTag("div",a$3);
- };
- Main.RouteRequest=function()
- {
-  var origin,destination,button,a,highwayBox,a$1,answer,a$2,a$3,x,a$4,a$5,a$6;
-  function f(el)
-  {
-   var opts,r,map;
-   opts=(r={},r.credentials=Main.credentials(),r.width=600,r.height=500,r);
-   map=new Maps$1.Map(el.get_Body(),opts);
-   map.setMapType(MapTypeId.road);
-   Maps$1.loadModule("Microsoft.Maps.Directions",{
-    callback:function()
+   return function(api)
+   {
+    var map,b,r;
+    function request(a$7,a$8)
     {
-     var dirman;
-     function request(a$7,a$8)
+     return Rest.RequestLocationByPoint(Main.credentials(),Global.Number(inputLat.get_Value()),Global.Number(inputLon.get_Value()),T.Empty,function(r$1)
      {
-      var r$1,r$2,r$3,r$4;
-      dirman.resetDirections();
-      dirman.addWaypoint(new Directions.Waypoint((r$1={},r$1.address=origin.get_Value(),r$1)));
-      dirman.addWaypoint(new Directions.Waypoint((r$2={},r$2.address=destination.get_Value(),r$2)));
-      dirman.setRenderOptions((r$3={},r$3.itineraryContainer=answer.Dom,r$3));
-      dirman.setRequestOptions((r$4={},r$4.distanceUnit=DistanceUnit.kilometers,r$4));
-      return dirman.calculateDirections();
-     }
-     dirman=new Directions.DirectionsManager(map);
-     (function(a$7)
-     {
-      EventsPervasives.Events().OnClick(function($1)
-      {
-       return function($2)
-       {
-        return request($1,$2);
-       };
-      },a$7);
-     }(button));
+      Main.GeocodeCallback(api,map,responseDiv,r$1);
+     });
     }
-   });
-  }
-  origin=Tags.Tags().NewTag("input",[]);
-  destination=Tags.Tags().NewTag("input",[]);
-  button=(a=[Attr.Attr().NewAttr("type","button"),Attr.Attr().NewAttr("value","Request route")],Tags.Tags().NewTag("input",a));
-  highwayBox=(a$1=[Attr.Attr().NewAttr("type","checkbox")],Tags.Tags().NewTag("input",a$1));
-  answer=(a$2=[Attr.Attr().NewAttr("id","answer")],Tags.Tags().NewTag("div",a$2));
-  a$3=[(x=Tags.Tags().NewTag("div",[]),(function(w)
-  {
-   Operators$1.OnAfterRender(f,w);
-  }(x),x)),(a$4=[Tags.Tags().text("From:")],Tags.Tags().NewTag("span",a$4)),origin,(a$5=[Tags.Tags().text("To:")],Tags.Tags().NewTag("span",a$5)),destination,highwayBox,(a$6=[Tags.Tags().text("Accept highways")],Tags.Tags().NewTag("span",a$6)),button,answer];
+    map=(b=(r={},r.credentials=Main.credentials(),r),new self.Microsoft.Maps.Map(el,b));
+    map.setMapType(api.MapTypeId.road);
+    (function(a$7)
+    {
+     EventsPervasives.Events().OnClick(function($1)
+     {
+      return function($2)
+      {
+       return request($1,$2);
+      };
+     },a$7);
+    }(button),button);
+   };
+  }),(a$4=[(a$5=[Tags.Tags().text("Latitude:")],Tags.Tags().NewTag("span",a$5)),inputLat,(a$6=[Tags.Tags().text("Longitude")],Tags.Tags().NewTag("span",a$6)),inputLon,button],Tags.Tags().NewTag("div",a$4)),responseDiv];
   return Tags.Tags().NewTag("div",a$3);
  };
  Main.StaticMap=function()
  {
-  var x;
-  function f(div)
+  return Main.MakeMapWrapper(function(el)
   {
-   var req1,r,r$1,r$2,req2,r$3;
-   req1=(r={
-    imagerySet:"Road"
-   },r.centerPoint=new Maps$1.Point(47.2,19.1),r.zoomLevel=10,r.pushpin=[(r$1={
-    x:47.1,
-    y:19
-   },r$1.iconStyle=2,r$1.label="P1",r$1),(r$2={
-    x:47.13,
-    y:19.17
-   },r$2.iconStyle=10,r$2)],r);
-   div.AppendN(Rest.StaticMap(Main.credentials(),req1));
-   req2=(r$3={
-    imagerySet:"Aerial"
-   },r$3.query="Washington DC",r$3);
-   div.AppendN(Rest.StaticMap(Main.credentials(),req2));
-  }
-  x=Tags.Tags().NewTag("div",[]);
-  (function(w)
-  {
-   Operators$1.OnAfterRender(f,w);
-  }(x));
-  return x;
+   return function()
+   {
+    var req1,r,r$1,r$2,req2,r$3;
+    req1=(r={
+     imagerySet:"Road"
+    },r.centerPoint=new self.Microsoft.Maps.Point(47.2,19.1),r.zoomLevel=10,r.pushpin=[(r$1={
+     x:47.1,
+     y:19
+    },r$1.iconStyle=2,r$1.label="P1",r$1),(r$2={
+     x:47.13,
+     y:19.17
+    },r$2.iconStyle=10,r$2)],r);
+    el.appendChild(Rest.StaticMap(Main.credentials(),req1));
+    req2=(r$3={
+     imagerySet:"Aerial"
+    },r$3.query="Washington DC",r$3);
+    el.appendChild(Rest.StaticMap(Main.credentials(),req2));
+   };
+  });
  };
  Main.ImageMetadata=function()
  {
-  var x;
   function callback(answer,result)
   {
-   var m,resource,a,x$1,a$1,x$2;
+   var m,resource,a,x,a$1,x$1;
+   function f(a$2)
+   {
+    return answer.appendChild(a$2);
+   }
+   function g(v)
+   {
+   }
    m=Main.CheckJsonResponse(result);
-   return m==null?(resource=Arrays.get(Arrays.get(result.resourceSets,0).resources,0),List.iter(function(a$2)
+   return m==null?(resource=Arrays.get(Arrays.get(result.resourceSets,0).resources,0),List.iter(function(x$2)
    {
-    answer.AppendI(a$2);
-   },List.ofArray([(a=[(x$1="Road map tile size: "+Global.String(resource.imageHeight)+"x"+Global.String(resource.imageWidth),Tags.Tags().text(x$1))],Tags.Tags().NewTag("p",a)),(a$1=[(x$2="Road map tile URL: "+resource.imageUrl,Tags.Tags().text(x$2))],Tags.Tags().NewTag("p",a$1))]))):answer.set_Text("Bad metadata response: "+m.$0);
+    return g(f(x$2));
+   },List.ofArray([(a=[(x="Road map tile size: "+Global.String(resource.imageHeight)+"x"+Global.String(resource.imageWidth),Tags.Tags().text(x))],Tags.Tags().NewTag("p",a)).get_Body(),(a$1=[(x$1="Road map tile URL: "+resource.imageUrl,Tags.Tags().text(x$1))],Tags.Tags().NewTag("p",a$1)).get_Body()]))):void(answer.textContent="Bad metadata response: "+m.$0);
   }
-  function f(el)
+  return Main.MakeMapWrapper(function(el)
   {
-   var req,r;
-   req=(r={
-    imagerySet:"Road"
-   },r.mapVersion="v1",r.centerPoint=new Maps$1.Point(47.2,19.1),r);
-   Rest.RequestImageryMetadata(Main.credentials(),req,function($1)
+   return function()
    {
-    return callback(el,$1);
-   });
+    var req,r;
+    req=(r={
+     imagerySet:"Road"
+    },r.mapVersion="v1",r.centerPoint=new self.Microsoft.Maps.Point(47.2,19.1),r);
+    return Rest.RequestImageryMetadata(Main.credentials(),req,function($1)
+    {
+     return callback(el,$1);
+    });
+   };
+  });
+ };
+ Main.MakeMapWrapper=function(f)
+ {
+  var x,a;
+  function f$1(el)
+  {
+   MapsLoading.OnLoad(f(el.get_Body()));
   }
-  x=Tags.Tags().NewTag("div",[]);
+  x=(a=[Attr.Attr().NewAttr("style","height: 600px;")],Tags.Tags().NewTag("div",a));
   (function(w)
   {
-   Operators$1.OnAfterRender(f,w);
+   Operators$1.OnAfterRender(f$1,w);
   }(x));
   return x;
  };
@@ -640,11 +584,11 @@ if (!console) {
   SC$2.$cctor();
   return SC$2.credentials;
  };
- Main.GeocodeCallback=function(map,resultElt,result)
+ Main.GeocodeCallback=function(api,map,resultElt,result)
  {
-  var m,resource,loc,pin,r;
+  var m,resource,loc,a,b,pin,r;
   m=Main.CheckJsonResponse(result);
-  m==null?(resource=Arrays.get(Arrays.get(result.resourceSets,0).resources,0),Main.IsUndefined(resource)?resultElt.set_Text("Location not found or no site around"):(loc=new Maps$1.Location(Arrays.get(resource.point.coordinates,0),Arrays.get(resource.point.coordinates,1)),pin=new Maps$1.Pushpin(loc),map.entities.push(pin),map.setView((r={},r.center=loc,r)),resultElt.set_Text(resource.name))):resultElt.set_Text("Bad location request: "+m.$0);
+  m==null?(resource=Arrays.get(Arrays.get(result.resourceSets,0).resources,0),Main.IsUndefined(resource)?resultElt.set_Text("Location not found or no site around"):(loc=(a=Arrays.get(resource.point.coordinates,0),(b=Arrays.get(resource.point.coordinates,1),new self.Microsoft.Maps.Location(a,b))),pin=new self.Microsoft.Maps.Pushpin(loc),map.entities.push(pin),map.setView((r={},r.center=loc,r)),resultElt.set_Text(resource.name))):resultElt.set_Text("Bad location request: "+m.$0);
  };
  Main.CheckJsonResponse=function(response)
  {
@@ -715,16 +659,6 @@ if (!console) {
   Obj.New.call(this);
   this.HtmlProvider=HtmlProvider;
  },TagBuilder);
- Operators$1.OnAfterRender=function(f,w)
- {
-  var r;
-  r=w.Render;
-  w.Render=function()
-  {
-   r.apply(w);
-   f(w);
-  };
- };
  Arrays.get=function(arr,n)
  {
   Arrays.checkBounds(arr,n);
@@ -872,21 +806,6 @@ if (!console) {
   {
    return this.HtmlProvider.GetValue(this.get_Body());
   },
-  AppendN:function(node)
-  {
-   this.HtmlProvider.AppendNode(this.get_Body(),node);
-  },
-  AppendI:function(pl)
-  {
-   var body,r;
-   body=pl.get_Body();
-   body.nodeType===2?this.HtmlProvider.AppendAttribute(this.get_Body(),body):this.HtmlProvider.AppendNode(this.get_Body(),pl.get_Body());
-   this.IsRendered?pl.Render():(r=this.RenderInternal,this.RenderInternal=function()
-   {
-    r();
-    pl.Render();
-   });
-  },
   set_Text:function(x)
   {
    this.HtmlProvider.SetText(this.get_Body(),x);
@@ -902,6 +821,17 @@ if (!console) {
      this.RenderInternal();
      this.IsRendered=true;
     }
+  },
+  AppendI:function(pl)
+  {
+   var body,r;
+   body=pl.get_Body();
+   body.nodeType===2?this.HtmlProvider.AppendAttribute(this.get_Body(),body):this.HtmlProvider.AppendNode(this.get_Body(),pl.get_Body());
+   this.IsRendered?pl.Render():(r=this.RenderInternal,this.RenderInternal=function()
+   {
+    r();
+    pl.Render();
+   });
   }
  },Pagelet,Element);
  Element.New=function(html,name)
@@ -933,26 +863,6 @@ if (!console) {
  T.Empty=new T({
   $:0
  });
- Pervasives.NewFromSeq=function(fields)
- {
-  var r,e,f;
-  r={};
-  e=Enumerator.Get(fields);
-  try
-  {
-   while(e.MoveNext())
-    {
-     f=e.Current();
-     r[f[0]]=f[1];
-    }
-  }
-  finally
-  {
-   if(typeof e=="object"&&"Dispose"in e)
-    e.Dispose();
-  }
-  return r;
- };
  List.iter=function(f,l)
  {
   var r;
@@ -1049,10 +959,70 @@ if (!console) {
   Pagelet.New.call(this);
   this.text=text;
  },Text);
+ Operators$1.OnAfterRender=function(f,w)
+ {
+  var r;
+  r=w.Render;
+  w.Render=function()
+  {
+   r.apply(w);
+   f(w);
+  };
+ };
+ MapsLoading.OnLoad=function(f)
+ {
+  MapsLoading.cbs().push(f);
+  self.Microsoft.Maps.MapTypeId?MapsLoading.Loaded():self.WebSharperBingMapsLoaded=function()
+  {
+   MapsLoading.Loaded();
+  };
+ };
+ MapsLoading.cbs=function()
+ {
+  SC$4.$cctor();
+  return SC$4.cbs;
+ };
+ MapsLoading.Loaded=function()
+ {
+  var e,_this,_delete;
+  e=new ListEnumerator.New(MapsLoading.cbs());
+  try
+  {
+   while(e.MoveNext$1())
+    (e.get_Current())(self.Microsoft.Maps);
+  }
+  finally
+  {
+   e.Dispose();
+  }
+  _this=MapsLoading.cbs();
+  _delete=Arrays.length(_this);
+  _this.splice.apply(_this,[0,_delete]);
+ };
  SC$2.$cctor=function()
  {
   SC$2.$cctor=Global.ignore;
   SC$2.credentials="Ai6uQaKEyZbUvd33y5HU41hvoov_piUMn6t78Qzg7L1DWY4MFZqhjZdgEmCpQlbe";
+ };
+ Pervasives.NewFromSeq=function(fields)
+ {
+  var r,e,f;
+  r={};
+  e=Enumerator.Get(fields);
+  try
+  {
+   while(e.MoveNext())
+    {
+     f=e.Current();
+     r[f[0]]=f[1];
+    }
+  }
+  finally
+  {
+   if(typeof e=="object"&&"Dispose"in e)
+    e.Dispose();
+  }
+  return r;
  };
  Strings.concat=function(separator,strings)
  {
@@ -1063,20 +1033,20 @@ if (!console) {
   {
    return Global.jQuery(node).val();
   },
+  SetText:function(node,text)
+  {
+   node.textContent=text;
+  },
+  AppendAttribute:function(node,attr)
+  {
+   this.SetAttribute(node,attr.nodeName,attr.value);
+  },
   AppendNode:function(node,el)
   {
    var _this,a;
    _this=Global.jQuery(node);
    a=Global.jQuery(el);
    _this.append.apply(_this,[a]);
-  },
-  AppendAttribute:function(node,attr)
-  {
-   this.SetAttribute(node,attr.nodeName,attr.value);
-  },
-  SetText:function(node,text)
-  {
-   node.textContent=text;
   },
   SetAttribute:function(node,name,value)
   {
@@ -1117,6 +1087,12 @@ if (!console) {
   Obj.New.call(this);
   this.HtmlProvider=HtmlProvider;
  },DeprecatedTagBuilder);
+ List$1=Collections.List=Runtime.Class({
+  GetEnumerator:function()
+  {
+   return Enumerator.Get(this);
+  }
+ },null,List$1);
  Attribute=Client.Attribute=Runtime.Class({
   get_Body:function()
   {
@@ -1147,8 +1123,8 @@ if (!console) {
  SC$4.$cctor=function()
  {
   SC$4.$cctor=Global.ignore;
-  SC$4.credentials="Ai6uQaKEyZbUvd33y5HU41hvoov_piUMn6t78Qzg7L1DWY4MFZqhjZdgEmCpQlbe";
-  SC$4.restApiUri="http://dev.virtualearth.net/REST/v1/";
+  SC$4.cbs=[];
+  SC$4.restApiUri="https://dev.virtualearth.net/REST/v1/";
   SC$4.RequestCallbackName="BingOnReceive";
  };
  Unchecked.Equals=function(a,b)
@@ -1331,6 +1307,32 @@ if (!console) {
    return i<s.length&&(e.c=s[i],e.s=i+1,true);
   },void 0);
  };
+ ListEnumerator=Collections.ListEnumerator=Runtime.Class({
+  MoveNext$1:function()
+  {
+   this.i=this.i+1;
+   return this.i<Arrays.length(this.arr);
+  },
+  get_Current:function()
+  {
+   return Arrays.get(this.arr,this.i);
+  },
+  MoveNext:function()
+  {
+   return this.MoveNext$1();
+  },
+  Current:function()
+  {
+   return Arrays.get(this.arr,this.i);
+  },
+  Dispose:Global.ignore
+ },Obj,ListEnumerator);
+ ListEnumerator.New=Runtime.Ctor(function(arr)
+ {
+  Obj.New.call(this);
+  this.arr=arr;
+  this.i=-1;
+ },ListEnumerator);
  JQueryEventSupport=Events.JQueryEventSupport=Runtime.Class({
   OnMouse:function(name,f,el)
   {
