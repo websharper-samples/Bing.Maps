@@ -1,4 +1,4 @@
-# WebSharper Bing.Maps
+# WebSharper Bing.Maps [![Build status](https://ci.appveyor.com/api/projects/status/d7fm1n7fqcgakens?svg=true)](https://ci.appveyor.com/project/IntelliFactory/bing-maps)
 
 Sample for [WebSharper](https://websharper.com) bindings for Bing.Maps.
 
